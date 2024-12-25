@@ -3,13 +3,13 @@ import org.w3c.dom.ls.LSOutput;
 public abstract class Event {
     protected int idUser;
     protected int idEvent;
-    protected int jumlahTamu;
+    protected float jumlahTamu;
     protected String lokasi;
     protected float hargaLayanan;
-    protected float totalHarga;
+    protected double totalHarga;
     protected String tanggal;
 
-    public Event(int idUser, int idEvent, int jumlahTamu, String lokasi, float hargaLayanan, float totalHarga, String tanggal) {
+    public Event(int idUser, int idEvent, float jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal) {
         this.idUser = idUser;
         this.idEvent = idEvent;
         this.jumlahTamu = jumlahTamu;
@@ -27,7 +27,7 @@ public abstract class Event {
         this.idEvent = idEvent;
     }
 
-    public int getJumlahTamu() {
+    public float getJumlahTamu() {
         return jumlahTamu;
     }
 
@@ -51,7 +51,7 @@ public abstract class Event {
         this.hargaLayanan = hargaLayanan;
     }
 
-    public float getTotalHarga() {
+    public double getTotalHarga() {
         return totalHarga;
     }
 

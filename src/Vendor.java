@@ -33,5 +33,5 @@ public abstract class Vendor {
         this.nama = nama;
     }
 
-    public abstract void deskripsiEvent();
+    public abstract String deskripsiEvent();
 }

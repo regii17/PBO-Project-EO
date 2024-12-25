@@ -12,10 +12,10 @@ public class Hiburan extends Vendor{
     }
 
     @Override
-    public void deskripsiEvent() {
-        System.out.println("Jenis hiburan : " + this.jenisHiburan);
-        System.out.println("Harga : " + super.harga);
-        System.out.println("Nama : " + super.nama);
+    public String deskripsiEvent() {
+        return "Nama : " + this.nama + "\n" +
+                "Harga: " + this.harga + "\n" +
+                "Jenis hiburan : " + this.jenisHiburan;
     }
 
     public String getJenisHiburan() {

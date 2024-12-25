@@ -1,0 +1,4 @@
+1|2000000|Ronald music|Jazz
+2|3000000|Ruan music|Pop
+3|2000000|Ziad music|Dangdut
+4|3000000|DJ Dudu|DJ

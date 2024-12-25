@@ -1,7 +1,7 @@
 public class Pernikahan extends Event{
     private String namaPasangan;
 
-    public Pernikahan(int idUser, int idEvent, int jumlahTamu, String lokasi, float hargaLayanan, float totalHarga, String tanggal, String namaPasangan) {
+    public Pernikahan(int idUser, int idEvent, float jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal, String namaPasangan) {
         super(idUser, idEvent, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal);
         this.namaPasangan = namaPasangan;
     }
@@ -13,6 +13,8 @@ public class Pernikahan extends Event{
 
     @Override
     void deskripsiEvent() {
+        super.totalHarga = super.hargaLayanan * super.jumlahTamu;
+
         System.out.println("Pernikahan Pasangan : " + this.namaPasangan);
         System.out.println("Tanggal Pernikahan : " + super.tanggal);
         System.out.println("Total Harga : " + super.totalHarga);

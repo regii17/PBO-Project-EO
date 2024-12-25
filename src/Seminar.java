@@ -2,7 +2,7 @@ public class Seminar extends Event{
     private String topic;
     private String pembicara;
 
-    public Seminar(int idUser, int idEvent, int jumlahTamu, String lokasi, float hargaLayanan, float totalHarga, String tanggal, String topic, String pembicara) {
+    public Seminar(int idUser, int idEvent, float jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal, String topic, String pembicara) {
         super(idUser, idEvent, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal);
         this.topic = topic;
         this.pembicara = pembicara;

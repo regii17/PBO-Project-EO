@@ -2,7 +2,7 @@ public class Ultah extends Event{
     private String nama;
     private int usia;
 
-    public Ultah(int idUser, int idEvent, int jumlahTamu, String lokasi, float hargaLayanan, float totalHarga, String tanggal, String nama, int usia) {
+    public Ultah(int idUser, int idEvent, float jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal, String nama, int usia) {
         super(idUser, idEvent, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal);
         this.nama = nama;
         this.usia = usia;

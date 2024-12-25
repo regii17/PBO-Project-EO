@@ -1,0 +1,4 @@
+1|200000|Masakann kekinian|Dessert
+2|3000000|Masakan padang umi|Makanan Berat
+3|2000000|Pop ice|Minuman
+4|3000000|Tini snack|snack

@@ -1,7 +1,7 @@
 public class Konser extends Event{
     private String artis;
 
-    public Konser(int idUser, int idEvent, int jumlahTamu, String lokasi, float hargaLayanan, float totalHarga, String tanggal, String artis) {
+    public Konser(int idUser, int idEvent, int jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal, String artis) {
         super(idUser, idEvent, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal);
         this.artis = artis;
     }

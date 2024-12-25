@@ -12,11 +12,10 @@ public class Decorator extends Vendor{
     }
 
     @Override
-    public void deskripsiEvent() {
-        System.out.println("Harga : " + this.harga);
-        System.out.println("Nama : " + this.nama);
-        System.out.println("JenisDecorator : " + this.jenisDecorator);
-
+    public String deskripsiEvent() {
+        return "Nama : " + this.nama + "\n" +
+                "Harga: " + this.harga + "\n" +
+                "JenisDecorator: " + this.jenisDecorator;
     }
 
     public String getJenisDecorator() {

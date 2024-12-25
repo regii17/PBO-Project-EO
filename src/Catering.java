@@ -20,11 +20,10 @@ public class Catering extends Vendor{
     }
 
     @Override
-    public void deskripsiEvent() {
-        System.out.println("Jenis makanan : " + this.jenisMakanan);
-        System.out.println("Harga : " + super.harga);
-        System.out.println("Nama : " + super.nama);
-
+    public String deskripsiEvent() {
+        return "Jenis makanan: " + this.jenisMakanan + "\n" +
+                "Harga: " + super.harga + "\n" +
+                "Nama: " + super.nama;
     }
 
 

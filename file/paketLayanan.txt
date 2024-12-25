@@ -1,0 +1,4 @@
+1|pernikahan|Masakann kekinian|Rian|Ronald music|Ronal Decor|400000
+2|seminar|Masakan padang umi|Rian|Ronald music|Ronal Decor|400000
+3|ulangtahun|Minuman udin|Rian|Ziad music|Ronal Decor|400000
+4|konser|-|-|-|Ronal Decor|400000

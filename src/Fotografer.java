@@ -10,10 +10,8 @@ public class Fotografer extends Vendor{
     }
 
     @Override
-    public void deskripsiEvent() {
-        System.out.println("Nama : " + super.nama);
-        System.out.println("Harga : " + super.harga);
-
-
+    public String deskripsiEvent() {
+        return "Nama : " + this.nama + "\n" +
+                "Harga: " + this.harga;
     }
 }
