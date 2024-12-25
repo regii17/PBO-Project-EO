@@ -307,5 +307,300 @@ public class Booking extends JFrame {
 
         return panel;
     }
+
+    private JPanel createSeminarPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setBackground(new Color(240, 248, 255));
+
+        JLabel titleLabel = new JLabel("Book a Seminar", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(new Color(30, 144, 255));
+        panel.add(titleLabel, BorderLayout.NORTH);
+
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        formPanel.setBackground(Color.WHITE);
+        formPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.WEST;
+
+        gbc.gridx = 0; gbc.gridy = 0;
+        JLabel topicLabel = new JLabel("Seminar Topic:");
+        topicLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(topicLabel, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 0;
+        JTextField topicField = new JTextField(20);
+        topicField.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(topicField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 1;
+        JLabel speakerLabel = new JLabel("Speaker Name:");
+        speakerLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(speakerLabel, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 1;
+        JTextField speakerField = new JTextField(20);
+        speakerField.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(speakerField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 2;
+        JLabel guestCountLabel = new JLabel("Number of Guests:");
+        guestCountLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(guestCountLabel, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 2;
+        JTextField guestCountField = new JTextField(20); // Increase width
+        guestCountField.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(guestCountField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 3;
+        JLabel locationLabel = new JLabel("Location:");
+        locationLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(locationLabel, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 3;
+        JTextField locationField = new JTextField(20); // Increase width
+        locationField.setFont(new Font("Arial", Font.PLAIN, 16)); // Increase font size
+        formPanel.add(locationField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 4;
+        JLabel dateLabel = new JLabel("Date (YYYY-MM-DD):");
+        dateLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(dateLabel, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 4;
+        JTextField dateField = new JTextField(20);
+        dateField.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(dateField, gbc);
+
+
+        JButton submitButton = createStyledButton("Submit");
+        submitButton.addActionListener(e -> {
+            try {
+                String topic = topicField.getText();
+                String pembicara = speakerField.getText();
+                float jumlahTamu = Float.parseFloat(guestCountField.getText());
+                String lokasi = locationField.getText();
+                String tanggal = dateField.getText();
+
+                mainApp.bookSeminar(topic, pembicara, jumlahTamu, lokasi, tanggal);
+
+                JOptionPane.showMessageDialog(panel, "Seminar booking successful!", "Info", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(panel, "Invalid input. Please check the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            topicField.setText("");
+            speakerField.setText("");
+            guestCountField.setText("");
+            locationField.setText("");
+            dateField.setText("");
+
+        });
+        gbc.gridx = 0; gbc.gridy = 5; gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        formPanel.add(submitButton, gbc);
+
+        panel.add(formPanel, BorderLayout.CENTER);
+
+        return panel;
+    }
+
+
+    private JPanel createBirthdayPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setBackground(new Color(240, 248, 255));
+
+        JLabel titleLabel = new JLabel("Book a Birthday", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(new Color(30, 144, 255));
+        panel.add(titleLabel, BorderLayout.NORTH);
+
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        formPanel.setBackground(Color.WHITE);
+        formPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.WEST;
+
+        gbc.gridx = 0; gbc.gridy = 0;
+        JLabel nameLabel = new JLabel("Name of Birthday Person:");
+        nameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(nameLabel, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 0;
+        JTextField nameField = new JTextField(20);
+        nameField.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(nameField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 1;
+        JLabel ageLabel = new JLabel("Age:");
+        ageLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(ageLabel, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 1;
+        JTextField ageField = new JTextField(20);
+        ageField.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(ageField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 2;
+        JLabel guestCountLabel = new JLabel("Number of Guests:");
+        guestCountLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(guestCountLabel, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 2;
+        JTextField guestCountField = new JTextField(20);
+        guestCountField.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(guestCountField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 3;
+        JLabel locationLabel = new JLabel("Location:");
+        locationLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(locationLabel, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 3;
+        JTextField locationField = new JTextField(20);
+        locationField.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(locationField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 4;
+        JLabel dateLabel = new JLabel("Date (YYYY-MM-DD):");
+        dateLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(dateLabel, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 4;
+        JTextField dateField = new JTextField(20);
+        dateField.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(dateField, gbc);
+
+        JButton submitButton = createStyledButton("Submit");
+        submitButton.addActionListener(e -> {
+            try {
+                String namaUltah = nameField.getText();
+                int usia = Integer.parseInt(ageField.getText());
+                float jumlahTamu = Float.parseFloat(guestCountField.getText());
+                String lokasi = locationField.getText();
+                String tanggal = dateField.getText();
+
+                mainApp.bookBirthday(namaUltah, usia, jumlahTamu, lokasi, tanggal);
+
+                JOptionPane.showMessageDialog(panel, "Birthday booking successful!", "Info", JOptionPane.INFORMATION_MESSAGE);
+
+                nameField.setText("");
+                ageField.setText("");
+                guestCountField.setText("");
+                locationField.setText("");
+                dateField.setText("");
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(panel, "Invalid input. Please check the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        gbc.gridx = 0; gbc.gridy = 5; gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        formPanel.add(submitButton, gbc);
+
+        panel.add(formPanel, BorderLayout.CENTER);
+
+        return panel;
+    }
+
+    private JPanel createConcertPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setBackground(new Color(240, 248, 255));
+
+        JLabel titleLabel = new JLabel("Book a Concert", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(new Color(30, 144, 255));
+        panel.add(titleLabel, BorderLayout.NORTH);
+
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        formPanel.setBackground(Color.WHITE);
+        formPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.WEST;
+
+        gbc.gridx = 0; gbc.gridy = 0;
+        JLabel artistLabel = new JLabel("Artist Name:");
+        artistLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(artistLabel, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 0;
+        JTextField artistField = new JTextField(20);
+        artistField.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(artistField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 1;
+        JLabel guestCountLabel = new JLabel("Number of Guests:");
+        guestCountLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(guestCountLabel, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 1;
+        JTextField guestCountField = new JTextField(20);
+        guestCountField.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(guestCountField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 2;
+        JLabel locationLabel = new JLabel("Location:");
+        locationLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(locationLabel, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 2;
+        JTextField locationField = new JTextField(20);
+        locationField.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(locationField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 3;
+        JLabel dateLabel = new JLabel("Date (YYYY-MM-DD):");
+        dateLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(dateLabel, gbc);
+
+        gbc.gridx = 1; gbc.gridy = 3;
+        JTextField dateField = new JTextField(20);
+        dateField.setFont(new Font("Arial", Font.PLAIN, 16));
+        formPanel.add(dateField, gbc);
+
+        JButton submitButton = createStyledButton("Submit");
+        submitButton.addActionListener(e -> {
+            try {
+                String namaArtis = artistField.getText();
+                float jumlahTamu = Float.parseFloat(guestCountField.getText());
+                String lokasi = locationField.getText();
+                String tanggal = dateField.getText();
+
+
+                mainApp.bookConcert(namaArtis, (int) jumlahTamu, lokasi, tanggal);
+
+                JOptionPane.showMessageDialog(panel, "Concert booking successful!", "Info", JOptionPane.INFORMATION_MESSAGE);
+
+
+                artistField.setText("");
+                guestCountField.setText("");
+                locationField.setText("");
+                dateField.setText("");
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(panel, "Invalid input. Please check the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        gbc.gridx = 0; gbc.gridy = 4; gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        formPanel.add(submitButton, gbc);
+
+        panel.add(formPanel, BorderLayout.CENTER);
+
+        return panel;
+    }
    
 }
