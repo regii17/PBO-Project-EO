@@ -1,8 +1,16 @@
 public class Konser extends Event{
     private String artis;
 
-    public Konser(int idUser, int idEvent, int jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal, String artis) {
-        super(idUser, idEvent, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal);
+    public Konser(int idUser, int idEvent, int jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal, String artis, Staff staff) {
+        super(idUser, idEvent, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal, staff);
+        this.artis = artis;
+    }
+
+    public String getArtis() {
+        return artis;
+    }
+
+    public void setArtis(String artis) {
         this.artis = artis;
     }
 
@@ -12,13 +20,7 @@ public class Konser extends Event{
     }
 
     @Override
-    void deskripsiEvent() {
-        System.out.println("Artis : " + this.artis);
-        System.out.println("Jumlah Tamu : " + super.jumlahTamu);
-        System.out.println("Harga Layanan : " + super.hargaLayanan);
-        System.out.println("Total Harga : " + super.totalHarga);
-        System.out.println("Tanggal : " + super.tanggal);
-
-
+    String deskripsiEvent() {
+        return "";
     }
 }

@@ -2,9 +2,25 @@ public class Ultah extends Event{
     private String nama;
     private int usia;
 
-    public Ultah(int idUser, int idEvent, float jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal, String nama, int usia) {
-        super(idUser, idEvent, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal);
+    public Ultah(int idUser, int idEvent, float jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal, String nama, int usia, Staff staff) {
+        super(idUser, idEvent, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal, staff);
         this.nama = nama;
+        this.usia = usia;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public int getUsia() {
+        return usia;
+    }
+
+    public void setUsia(int usia) {
         this.usia = usia;
     }
 
@@ -14,13 +30,7 @@ public class Ultah extends Event{
     }
 
     @Override
-    void deskripsiEvent() {
-        System.out.println("Nama : " + this.nama);
-        System.out.println("Usia : " + this.usia);
-        System.out.println("Jumlah Tamu : " + super.jumlahTamu);
-        System.out.println("Lokasi : " + super.lokasi);
-        System.out.println("Harga Layanan : " + super.hargaLayanan);
-        System.out.println("Total Harga : " + super.totalHarga);
-        System.out.println("Tanggal : " + super.tanggal);
+    String deskripsiEvent() {
+        return "";
     }
 }

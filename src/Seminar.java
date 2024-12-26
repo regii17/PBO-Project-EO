@@ -2,9 +2,25 @@ public class Seminar extends Event{
     private String topic;
     private String pembicara;
 
-    public Seminar(int idUser, int idEvent, float jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal, String topic, String pembicara) {
-        super(idUser, idEvent, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal);
+    public Seminar(int idUser, int idEvent, float jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal, String topic, String pembicara, Staff staff) {
+        super(idUser, idEvent, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal, staff);
         this.topic = topic;
+        this.pembicara = pembicara;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public String getPembicara() {
+        return pembicara;
+    }
+
+    public void setPembicara(String pembicara) {
         this.pembicara = pembicara;
     }
 
@@ -14,13 +30,7 @@ public class Seminar extends Event{
     }
 
     @Override
-    void deskripsiEvent() {
-        System.out.println("Topic : " + this.topic);
-        System.out.println("Pembicara : " + this.pembicara);
-        System.out.println("Jumlah Tamu : " + super.jumlahTamu);
-        System.out.println("Lokasi : " + super.lokasi);
-        System.out.println("Harga Layanan : " + super.hargaLayanan);
-        System.out.println("Total Harga : " + super.totalHarga);
-        System.out.println("Tanggal : " + super.tanggal);
+    String deskripsiEvent() {
+        return "";
     }
 }

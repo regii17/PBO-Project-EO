@@ -1,9 +1,13 @@
 public class Pernikahan extends Event{
     private String namaPasangan;
 
-    public Pernikahan(int idUser, int idEvent, float jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal, String namaPasangan) {
-        super(idUser, idEvent, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal);
+    public Pernikahan(int idUser, int idEvent, float jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal, String namaPasangan, Staff staff) {
+        super(idUser, idEvent, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal, staff);
         this.namaPasangan = namaPasangan;
+    }
+
+    public String getNamaPasangan() {
+        return namaPasangan;
     }
 
     @Override
@@ -12,14 +16,16 @@ public class Pernikahan extends Event{
     }
 
     @Override
-    void deskripsiEvent() {
-        super.totalHarga = super.hargaLayanan * super.jumlahTamu;
+    public String deskripsiEvent() {
+        return "Pernikahan Pasangan: " + namaPasangan + "\n" +
+                "Tanggal Pernikahan: " + tanggal + "\n" +
+                "Total Harga: " + totalHarga + "\n" +
+                "Harga Layanan: " + hargaLayanan + "\n" +
+                "Lokasi: " + lokasi + "\n" +
+                "Jumlah Tamu: " + jumlahTamu;
+    }
 
-        System.out.println("Pernikahan Pasangan : " + this.namaPasangan);
-        System.out.println("Tanggal Pernikahan : " + super.tanggal);
-        System.out.println("Total Harga : " + super.totalHarga);
-        System.out.println("Harga Layanan : " + super.hargaLayanan);
-        System.out.println("Lokasi : " + super.lokasi);
-        System.out.println("Jumlah Tamu : " + super.jumlahTamu);
+    public String toString() {
+        return deskripsiEvent();
     }
 }

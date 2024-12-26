@@ -4,10 +4,6 @@ public class Fotografer extends Vendor{
         super(idVendor, harga, nama);
     }
 
-    @Override
-    public int getIdVendor() {
-        return super.getIdVendor();
-    }
 
     @Override
     public String deskripsiEvent() {

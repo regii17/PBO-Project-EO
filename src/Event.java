@@ -6,10 +6,11 @@ public abstract class Event {
     protected float jumlahTamu;
     protected String lokasi;
     protected float hargaLayanan;
-    protected double totalHarga;
+    protected double totalHarga = 0;
     protected String tanggal;
+    protected Staff kepalaStaff;
 
-    public Event(int idUser, int idEvent, float jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal) {
+    public Event(int idUser, int idEvent, float jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal, Staff staff) {
         this.idUser = idUser;
         this.idEvent = idEvent;
         this.jumlahTamu = jumlahTamu;
@@ -17,6 +18,7 @@ public abstract class Event {
         this.hargaLayanan = hargaLayanan;
         this.totalHarga = totalHarga;
         this.tanggal = tanggal;
+        this.kepalaStaff = staff;
     }
 
     public int getIdEvent() {
@@ -75,7 +77,23 @@ public abstract class Event {
         this.idUser = idUser;
     }
 
-    abstract void deskripsiEvent();
+    public void setJumlahTamu(float jumlahTamu) {
+        this.jumlahTamu = jumlahTamu;
+    }
+
+    public void setTotalHarga(double totalHarga) {
+        this.totalHarga = totalHarga;
+    }
+
+    public Staff getKepalaStaff() {
+        return kepalaStaff;
+    }
+
+    public void setKepalaStaff(Staff kepalaStaff) {
+        this.kepalaStaff = kepalaStaff;
+    }
+
+    abstract String deskripsiEvent();
 
 
 

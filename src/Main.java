@@ -5,11 +5,7 @@ import java.io.IOException;
     public class Main {
         private static Scanner in = new Scanner(System.in);
         private static List<Klien> daftarUser = new ArrayList<>();
-        private static Map<Integer, List<Integer>> userFotograferHistory = new HashMap<>();
-        private static Map<Integer, List<Integer>> userCateringHistory = new HashMap<>();
-        private static Map<Integer, List<Integer>> userHiburanHistory = new HashMap<>();
-        private static Map<Integer, List<Integer>> userDecoratorHistory = new HashMap<>();
-        private static Map<Integer, List<Integer>> userPaketLayananHistory = new HashMap<>();
+        private static Map<Integer, List<Integer>> userWeddingHistory = new HashMap<>();
         private static List<Pernikahan> daftarPemesananPernikahan = new ArrayList<>();
         private static List<Seminar> daftarPemesananSeminar = new ArrayList<>();
         private static List<Ultah> daftarPemesananUltah = new ArrayList<>();
@@ -19,85 +15,225 @@ import java.io.IOException;
         private static List<Hiburan> daftarPemesananHiburan = new ArrayList<>();
         private static List<Decorator> daftarPemesananDecorator = new ArrayList<>();
         private static List<PaketLayanan> daftarPaketLayanan = new ArrayList<>();
+        private Map<Integer, List<Fotografer>> userFotograferBookings = new HashMap<>();
+        private Map<Integer, List<Catering>> userCateringBookings = new HashMap<>();
+        private Map<Integer, List<Decorator>> userDecoratorBookings = new HashMap<>();
+        private Map<Integer, List<Hiburan>> userHiburanBookings = new HashMap<>();
+
+        public void addFotograferBooking(int userId, Fotografer fotografer) {
+            userFotograferBookings.computeIfAbsent(userId, k -> new ArrayList<>()).add(fotografer);
+        }
+
+        public void addCateringBooking(int userId, Catering catering) {
+            userCateringBookings.computeIfAbsent(userId, k -> new ArrayList<>()).add(catering);
+        }
+
+        public void addDecoratorBooking(int userId, Decorator decorator) {
+            userDecoratorBookings.computeIfAbsent(userId, k -> new ArrayList<>()).add(decorator);
+        }
+
+        public void addHiburanBooking(int userId, Hiburan hiburan) {
+            userHiburanBookings.computeIfAbsent(userId, k -> new ArrayList<>()).add(hiburan);
+        }
+
+        public List<Fotografer> getUserFotograferBookings(int userId) {
+            return userFotograferBookings.getOrDefault(userId, new ArrayList<>());
+        }
+
+        public List<Catering> getUserCateringBookings(int userId) {
+            return userCateringBookings.getOrDefault(userId, new ArrayList<>());
+        }
+
+        public List<Decorator> getUserDecoratorBookings(int userId) {
+            return userDecoratorBookings.getOrDefault(userId, new ArrayList<>());
+        }
+
+        public List<Hiburan> getUserHiburanBookings(int userId) {
+            return userHiburanBookings.getOrDefault(userId, new ArrayList<>());
+        }
+
         private static int varIdEvent = 1;
-        private static int varIdVendor = 1;
-        static int varIdUser = 1;
-        private static int varIdPaket = 1;
-        private static int pilEvent;
-        private static int pilTambahan;
-        private static int pilTambahan2;
-        private static int pilPaketlayanan;
+        private static int idUser;
+        private static int varStaff = 0;
+        private double totalHargaEvent = 0;
 
-            public void bookWedding(String namaPasangan, float jumlahTamu, String lokasi, String tanggal) {
-                float hargaLayanan = 200000;
-                double totalHarga = hargaLayanan * jumlahTamu;
+        private String[] layananEvent = new String[4];
+        private int eventCount = 0;
+        private int vendorCount = 0;
 
-                Pernikahan pernikahan = new Pernikahan(varIdUser ++, varIdEvent++, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal, namaPasangan);
-                daftarPemesananPernikahan.add(pernikahan);
+        private double totalHargaVendor = 0;
+
+        private String[] layananVendor = new String[5];
+        private int vandorCount = 0;
+
+        public String cetakNotaEvent(){
+            NotaEvent nota = new NotaEvent(layananEvent[0],layananEvent[1],layananEvent[2],layananEvent[3],totalHargaEvent);
+            return nota.cetakNota();
+        }
+
+        public void setTotalHargaEvent(double totalHargaEvent) {
+            this.totalHargaEvent += totalHargaEvent;
+        }
+
+        public String cetakNotaVendor(){
+            NotaVendor nota = new NotaVendor(layananVendor[0],layananVendor[1],layananVendor[2],layananVendor[3],layananVendor[4],totalHargaEvent);
+            return nota.cetakNota();
+        }
+
+        public void setTotalHargaVendor(double totalHargaVendor) {
+            this.totalHargaVendor += totalHargaVendor;
+        }
+
+        public void setLayananEvent(String eventDescription) {
+            if (eventCount < layananEvent.length) {
+                layananEvent[eventCount] = eventDescription;
+                eventCount++;
+            } else {
+                System.out.println("Event array is full.");
             }
+        }
 
-            public void bookSeminar(String topic, String pembicara, float jumlahTamu, String lokasi, String tanggal) {
-                float hargaLayananSeminar = 30000;
-                double totalHargaSeminar = jumlahTamu * hargaLayananSeminar;
-
-                Seminar seminar = new Seminar(varIdUser ++, varIdEvent++, jumlahTamu, lokasi, hargaLayananSeminar, totalHargaSeminar, tanggal, topic, pembicara);
-                daftarPemesananSeminar.add(seminar);
+        public void setLayananVendor(String vendorDescription) {
+            if (vendorCount < layananVendor.length) {
+                layananVendor[vendorCount] = vendorDescription;
+                vendorCount++;
+            } else {
+                System.out.println("Event array is full.");
             }
+        }
 
-            public void bookBirthday(String namaUltah, int usia, float jumlahTamu, String lokasi, String tanggal) {
-                float hargaLayananUltah = 200000;
-                double totalHargaUltah = jumlahTamu * hargaLayananUltah;
+        private Staff[] staffMembers = new Staff[10];
+        private int staffCount = 0;
 
-                Ultah ultah = new Ultah(varIdUser ++, varIdEvent++, jumlahTamu, lokasi, hargaLayananUltah, totalHargaUltah, tanggal, namaUltah, usia);
-                daftarPemesananUltah.add(ultah);
-            }
+        public void bookWedding(String namaPasangan, float jumlahTamu, String lokasi, String tanggal) {
+            float hargaLayanan = 200000;
+            double totalHarga = hargaLayanan * jumlahTamu;
+            Staff kepalaStaff = staffMembers[varStaff++];
 
-            public void bookConcert(String namaArtis, int jumlahTamu, String lokasi, String tanggal) {
-                float hargaLayananKonser = 50000;
-                double totalHargaKonser = jumlahTamu * hargaLayananKonser;
+            Pernikahan pernikahan = new Pernikahan(idUser, varIdEvent++, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal, namaPasangan, kepalaStaff);
+            daftarPemesananPernikahan.add(pernikahan);
+        }
 
-                Konser konser = new Konser(varIdUser ++, varIdEvent++, jumlahTamu, lokasi, hargaLayananKonser, totalHargaKonser, tanggal, namaArtis);
-                daftarPemesananKonser.add(konser);
-            }
+        public void bookSeminar(String topic, String pembicara, float jumlahTamu, String lokasi, String tanggal) {
+            float hargaLayananSeminar = 30000;
+            double totalHargaSeminar = jumlahTamu * hargaLayananSeminar;
+            Staff kepalaStaff = staffMembers[varStaff++];
 
-            public List<PaketLayanan> getDaftarPaketLayanan() {
+            Seminar seminar = new Seminar(idUser, varIdEvent++, jumlahTamu, lokasi, hargaLayananSeminar, totalHargaSeminar, tanggal, topic, pembicara, kepalaStaff);
+            daftarPemesananSeminar.add(seminar);
+        }
+
+        public void bookBirthday(String namaUltah, int usia, float jumlahTamu, String lokasi, String tanggal) {
+            float hargaLayananUltah = 200000;
+            double totalHargaUltah = jumlahTamu * hargaLayananUltah;
+            Staff kepalaStaff = staffMembers[varStaff++];
+
+            Ultah ultah = new Ultah(idUser, varIdEvent++, jumlahTamu, lokasi, hargaLayananUltah, totalHargaUltah, tanggal, namaUltah, usia, kepalaStaff);
+            daftarPemesananUltah.add(ultah);
+        }
+
+        public void bookConcert(String namaArtis, int jumlahTamu, String lokasi, String tanggal) {
+            float hargaLayananKonser = 50000;
+            double totalHargaKonser = jumlahTamu * hargaLayananKonser;
+            Staff kepalaStaff = staffMembers[varStaff++];
+
+            Konser konser = new Konser(idUser, varIdEvent++, jumlahTamu, lokasi, hargaLayananKonser, totalHargaKonser, tanggal, namaArtis, kepalaStaff);
+            daftarPemesananKonser.add(konser);
+        }
+
+
+        public List<PaketLayanan> getDaftarPaketLayanan() {
                 return daftarPaketLayanan;
             }
 
-            public List<Fotografer> getDaftarPemesananFotografer() {
-                return daftarPemesananFotografer;
+            public List<Klien> getDaftarUser() {
+                return daftarUser;
             }
 
-            public List<Catering> getDaftarPemesananCatering(){
+            public void setIdUser(int idUser) {
+                Main.idUser = idUser;
+            }
+
+            public static int getIdUser() {
+                return idUser;
+            }
+
+        public Map<Integer, List<Integer>> getUserWeddingHistory() {
+            return userWeddingHistory;
+        }
+
+        public static void addWeddingHistory(int userId, int weddingId) {
+            if (userWeddingHistory == null) {
+                userWeddingHistory = new HashMap<>();
+            }
+
+            userWeddingHistory.putIfAbsent(userId, new ArrayList<>());
+            boolean isAdded = userWeddingHistory.get(userId).add(weddingId);
+
+            if (isAdded) {
+                System.out.println("Success: Wedding history added for User ID: " + userId + " with Wedding ID: " + weddingId);
+            } else {
+                System.err.println("Error: Failed to add wedding history for User ID: " + userId);
+            }
+        }
+
+        public List<Integer> getWeddingHistory(int userId) {
+            if (userWeddingHistory == null || !userWeddingHistory.containsKey(userId)) {
+                System.err.println("Error: No wedding history found for User ID: " + userId);
+                return new ArrayList<>();
+            }
+            List<Integer> history = userWeddingHistory.get(userId);
+            System.out.println("Success: Retrieved wedding history for User ID: " + userId + " -> " + history);
+            return history;
+        }
+
+        public List<Pernikahan> getUserWeddingBookings(int userId) {
+            List<Pernikahan> userBookings = new ArrayList<>();
+            for (Pernikahan pernikahan : daftarPemesananPernikahan) {
+                if (pernikahan.getIdUser() == userId) {
+                    userBookings.add(pernikahan);
+                }
+            }
+            return userBookings;
+        }
+
+        public List<Seminar> getUserSeminarBookings(int userId) {
+            List<Seminar> userBookings = new ArrayList<>();
+            for (Seminar seminar : daftarPemesananSeminar) {
+                if (seminar.getIdUser() == userId) {
+                    userBookings.add(seminar);
+                }
+            }
+            return userBookings;
+        }
+
+        public List<Ultah> getUserUltahBookings(int userId) {
+            List<Ultah> userBookings = new ArrayList<>();
+            for (Ultah ultah : daftarPemesananUltah) {
+                if (ultah.getIdUser() == userId) {
+                    userBookings.add(ultah);
+                }
+            }
+            return userBookings;
+        }
+
+        public List<Konser> getUserKonserBookings(int userId) {
+            List<Konser> userBookings = new ArrayList<>();
+            for (Konser konser : daftarPemesananKonser) {
+                if (konser.getIdUser() == userId) {
+                    userBookings.add(konser);
+                }
+            }
+            return userBookings;
+        }
+
+        public List<Fotografer> getDaftarPemesananFotografer() {return daftarPemesananFotografer;}
+        public List<Catering> getDaftarPemesananCatering(){
                 return daftarPemesananCatering;
             }
-
-            public List<Decorator> getDaftarPemesananDecorator(){
-                return daftarPemesananDecorator;
-            }
-
-            public List<Hiburan> getDaftarPemesananHiburan(){
+        public List<Decorator> getDaftarPemesananDecorator(){return daftarPemesananDecorator;}
+        public List<Hiburan> getDaftarPemesananHiburan(){
                 return daftarPemesananHiburan;
-            }
-
-            public Map<Integer, List<Integer>> getUserFotograferHistory() {
-                return userFotograferHistory;
-            }
-
-            public Map<Integer, List<Integer>> getUserCateringHistory() {
-                return userCateringHistory;
-            }
-
-            public Map<Integer, List<Integer>> getUserHiburanHistory() {
-                return userHiburanHistory;
-            }
-
-            public Map<Integer, List<Integer>> getUserDecoratorHistory() {
-                return userDecoratorHistory;
-            }
-
-            public Map<Integer, List<Integer>> getUserPaketLayananHistory() {
-                return userPaketLayananHistory;
             }
 
         public static void main(String[] args) throws IOException {
@@ -158,8 +294,14 @@ import java.io.IOException;
                 daftarUser.add(new Klien(idKlien, nama, noTelp, alamat));
             }
 
+            List<String[]> dataStaff= FileReader.readFromFile("file/staff.txt");
+            for (String[] record : dataStaff) {
+                String nama = record[0];
+                new Staff(nama);
+            }
+
             Main mainApp = new Main();
-            new Booking(mainApp);
+            new Login(mainApp);
             in.close();
         }
     }
