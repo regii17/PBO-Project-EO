@@ -21,7 +21,7 @@ public class Booking extends JFrame {
         Image scaledIcon = icon.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         ImageIcon iconFix = new ImageIcon(scaledIcon);
 
-        ImageIcon logout = new ImageIcon("/home/erqyan/Documents/KULIAH/SEMESTER3/Kelas/logout.png");
+        ImageIcon logout = new ImageIcon("/home/erqyan/IdeaProjects/EO/logout.png");
         Image scaledLogout = logout.getImage().getScaledInstance(45, 45, Image.SCALE_SMOOTH);
         ImageIcon logoutFix = new ImageIcon(scaledLogout);
 
