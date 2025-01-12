@@ -2,15 +2,14 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
-public class Booking extends JFrame {
+public class Gui extends JFrame {
     private Main mainApp;
     private CardLayout cardLayout;
 
-    public Booking(Main mainApp) {
+    public Gui(Main mainApp) {
         this.mainApp = mainApp;
         setTitle("Booking EO Blue Spring");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -131,7 +130,7 @@ public class Booking extends JFrame {
         panel.add(welcomeLabel, BorderLayout.NORTH);
 
         JPanel servicesPanel = new JPanel(new GridLayout(2, 2, 10, 10));
-        servicesPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(30, 144, 255), 2), "Our Services", TitledBorder.CENTER, TitledBorder.TOP, new Font("Arial", Font.BOLD, 16), new Color(30, 144, 255)));
+        servicesPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(30, 144, 255), 2), "Services", TitledBorder.CENTER, TitledBorder.TOP, new Font("Arial", Font.BOLD, 16), new Color(30, 144, 255)));
         servicesPanel.setBackground(Color.WHITE);
 
         JLabel service1 = createServiceLabel("1. Pernikahan");
@@ -147,7 +146,7 @@ public class Booking extends JFrame {
         panel.add(servicesPanel, BorderLayout.CENTER);
 
         JPanel upcomingEventsPanel = new JPanel();
-        upcomingEventsPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(30, 144, 255), 2), "Upcoming Events", TitledBorder.CENTER, TitledBorder.TOP, new Font("Arial", Font.BOLD, 16), new Color(30, 144, 255)));
+        upcomingEventsPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(30, 144, 255), 2), "Events yang akan datang", TitledBorder.CENTER, TitledBorder.TOP, new Font("Arial", Font.BOLD, 16), new Color(30, 144, 255)));
         upcomingEventsPanel.setLayout(new BoxLayout(upcomingEventsPanel, BoxLayout.Y_AXIS));
         upcomingEventsPanel.setBackground(Color.WHITE);
 
@@ -162,7 +161,7 @@ public class Booking extends JFrame {
         panel.add(upcomingEventsPanel, BorderLayout.SOUTH);
 
         JPanel quickLinksPanel = new JPanel(new FlowLayout());
-        quickLinksPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(30, 144, 255), 2), "Quick Links", TitledBorder.CENTER, TitledBorder.TOP, new Font("Arial", Font.BOLD, 16), new Color(30, 144, 255)));
+        quickLinksPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(30, 144, 255), 2), "Menu Cepat", TitledBorder.CENTER, TitledBorder.TOP, new Font("Arial", Font.BOLD, 16), new Color(30, 144, 255)));
         quickLinksPanel.setBackground(new Color(240, 248, 255));
 
         JButton newBookingButton = createStyledButton("Booking");
@@ -298,7 +297,7 @@ public class Booking extends JFrame {
                     Main.addWeddingHistory(userId, weddingId);
 
                     List<Integer> history = mainApp.getWeddingHistory(userId);
-                    if (!history.contains(weddingId)) {
+                    if (!history.contains(Optional.of(weddingId))) {
                         JOptionPane.showMessageDialog(panel,
                                 "Error: Wedding history not saved.",
                                 "Error",
@@ -347,7 +346,7 @@ public class Booking extends JFrame {
         gbc.anchor = GridBagConstraints.WEST;
 
         gbc.gridx = 0; gbc.gridy = 0;
-        JLabel topicLabel = new JLabel("Seminar Topic:");
+        JLabel topicLabel = new JLabel("Topik Seminar :");
         topicLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         formPanel.add(topicLabel, gbc);
 
@@ -357,7 +356,7 @@ public class Booking extends JFrame {
         formPanel.add(topicField, gbc);
 
         gbc.gridx = 0; gbc.gridy = 1;
-        JLabel speakerLabel = new JLabel("Speaker Name:");
+        JLabel speakerLabel = new JLabel("Nama Pembicara:");
         speakerLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         formPanel.add(speakerLabel, gbc);
 
@@ -367,7 +366,7 @@ public class Booking extends JFrame {
         formPanel.add(speakerField, gbc);
 
         gbc.gridx = 0; gbc.gridy = 2;
-        JLabel guestCountLabel = new JLabel("Number of Guests:");
+        JLabel guestCountLabel = new JLabel("Jumlah tamu:");
         guestCountLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         formPanel.add(guestCountLabel, gbc);
 
@@ -377,7 +376,7 @@ public class Booking extends JFrame {
         formPanel.add(guestCountField, gbc);
 
         gbc.gridx = 0; gbc.gridy = 3;
-        JLabel locationLabel = new JLabel("Location:");
+        JLabel locationLabel = new JLabel("Lokasi :");
         locationLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         formPanel.add(locationLabel, gbc);
 
@@ -387,7 +386,7 @@ public class Booking extends JFrame {
         formPanel.add(locationField, gbc);
 
         gbc.gridx = 0; gbc.gridy = 4;
-        JLabel dateLabel = new JLabel("Date (YYYY-MM-DD):");
+        JLabel dateLabel = new JLabel("Tanggal (YYYY-MM-DD):");
         dateLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         formPanel.add(dateLabel, gbc);
 
@@ -449,7 +448,7 @@ public class Booking extends JFrame {
         gbc.anchor = GridBagConstraints.WEST;
 
         gbc.gridx = 0; gbc.gridy = 0;
-        JLabel nameLabel = new JLabel("Name of Birthday Person:");
+        JLabel nameLabel = new JLabel("Nama yang ulang tahun:");
         nameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         formPanel.add(nameLabel, gbc);
 
@@ -459,7 +458,7 @@ public class Booking extends JFrame {
         formPanel.add(nameField, gbc);
 
         gbc.gridx = 0; gbc.gridy = 1;
-        JLabel ageLabel = new JLabel("Age:");
+        JLabel ageLabel = new JLabel("Umur :");
         ageLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         formPanel.add(ageLabel, gbc);
 
@@ -469,7 +468,7 @@ public class Booking extends JFrame {
         formPanel.add(ageField, gbc);
 
         gbc.gridx = 0; gbc.gridy = 2;
-        JLabel guestCountLabel = new JLabel("Number of Guests:");
+        JLabel guestCountLabel = new JLabel("Jumlah tamu :");
         guestCountLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         formPanel.add(guestCountLabel, gbc);
 
@@ -479,7 +478,7 @@ public class Booking extends JFrame {
         formPanel.add(guestCountField, gbc);
 
         gbc.gridx = 0; gbc.gridy = 3;
-        JLabel locationLabel = new JLabel("Location:");
+        JLabel locationLabel = new JLabel("Lokasi :");
         locationLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         formPanel.add(locationLabel, gbc);
 
@@ -489,7 +488,7 @@ public class Booking extends JFrame {
         formPanel.add(locationField, gbc);
 
         gbc.gridx = 0; gbc.gridy = 4;
-        JLabel dateLabel = new JLabel("Date (YYYY-MM-DD):");
+        JLabel dateLabel = new JLabel("Tanggal (YYYY-MM-DD):");
         dateLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         formPanel.add(dateLabel, gbc);
 
@@ -550,7 +549,7 @@ public class Booking extends JFrame {
         gbc.anchor = GridBagConstraints.WEST;
 
         gbc.gridx = 0; gbc.gridy = 0;
-        JLabel artistLabel = new JLabel("Artist Name:");
+        JLabel artistLabel = new JLabel("Nama artis:");
         artistLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         formPanel.add(artistLabel, gbc);
 
@@ -560,7 +559,7 @@ public class Booking extends JFrame {
         formPanel.add(artistField, gbc);
 
         gbc.gridx = 0; gbc.gridy = 1;
-        JLabel guestCountLabel = new JLabel("Number of Guests:");
+        JLabel guestCountLabel = new JLabel("Jumlah tamu :");
         guestCountLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         formPanel.add(guestCountLabel, gbc);
 
@@ -570,7 +569,7 @@ public class Booking extends JFrame {
         formPanel.add(guestCountField, gbc);
 
         gbc.gridx = 0; gbc.gridy = 2;
-        JLabel locationLabel = new JLabel("Location:");
+        JLabel locationLabel = new JLabel("Lokasi :");
         locationLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         formPanel.add(locationLabel, gbc);
 
@@ -580,7 +579,7 @@ public class Booking extends JFrame {
         formPanel.add(locationField, gbc);
 
         gbc.gridx = 0; gbc.gridy = 3;
-        JLabel dateLabel = new JLabel("Date (YYYY-MM-DD):");
+        JLabel dateLabel = new JLabel("Tanggal (YYYY-MM-DD):");
         dateLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         formPanel.add(dateLabel, gbc);
 
