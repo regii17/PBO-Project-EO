@@ -47,7 +47,7 @@ public class Login{
                     if (isValidUser(id, mainApp)) {
                         loginFrame.dispose();
                         mainApp.setIdUser(id);
-                        new Booking(mainApp);
+                        new Gui(mainApp);
                     } else {
                         messageLabel.setText("Invalid User ID. Please try again.");
                     }

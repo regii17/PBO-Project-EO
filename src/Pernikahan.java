@@ -1,7 +1,8 @@
 public class Pernikahan extends Event{
     private String namaPasangan;
 
-    public Pernikahan(int idUser, int idEvent, float jumlahTamu, String lokasi, float hargaLayanan, double totalHarga, String tanggal, String namaPasangan, Staff staff) {
+    public Pernikahan(int idUser, int idEvent, float jumlahTamu, String lokasi, 
+                     float hargaLayanan, double totalHarga, String tanggal, String namaPasangan, Staff staff) {
         super(idUser, idEvent, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal, staff);
         this.namaPasangan = namaPasangan;
     }

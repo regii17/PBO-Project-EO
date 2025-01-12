@@ -1,56 +1,8 @@
 import java.io.IOException;
     import java.util.*;
-    import java.util.List;
 
     public class Main {
         private static Scanner in = new Scanner(System.in);
-        private static List<Klien> daftarUser = new ArrayList<>();
-        private static Map<Integer, List<Integer>> userWeddingHistory = new HashMap<>();
-        private static List<Pernikahan> daftarPemesananPernikahan = new ArrayList<>();
-        private static List<Seminar> daftarPemesananSeminar = new ArrayList<>();
-        private static List<Ultah> daftarPemesananUltah = new ArrayList<>();
-        private static List<Konser> daftarPemesananKonser = new ArrayList<>();
-        private static List<Fotografer> daftarPemesananFotografer = new ArrayList<>();
-        private static List<Catering> daftarPemesananCatering = new ArrayList<>();
-        private static List<Hiburan> daftarPemesananHiburan = new ArrayList<>();
-        private static List<Decorator> daftarPemesananDecorator = new ArrayList<>();
-        private static List<PaketLayanan> daftarPaketLayanan = new ArrayList<>();
-        private Map<Integer, List<Fotografer>> userFotograferBookings = new HashMap<>();
-        private Map<Integer, List<Catering>> userCateringBookings = new HashMap<>();
-        private Map<Integer, List<Decorator>> userDecoratorBookings = new HashMap<>();
-        private Map<Integer, List<Hiburan>> userHiburanBookings = new HashMap<>();
-
-        public void addFotograferBooking(int userId, Fotografer fotografer) {
-            userFotograferBookings.computeIfAbsent(userId, k -> new ArrayList<>()).add(fotografer);
-        }
-
-        public void addCateringBooking(int userId, Catering catering) {
-            userCateringBookings.computeIfAbsent(userId, k -> new ArrayList<>()).add(catering);
-        }
-
-        public void addDecoratorBooking(int userId, Decorator decorator) {
-            userDecoratorBookings.computeIfAbsent(userId, k -> new ArrayList<>()).add(decorator);
-        }
-
-        public void addHiburanBooking(int userId, Hiburan hiburan) {
-            userHiburanBookings.computeIfAbsent(userId, k -> new ArrayList<>()).add(hiburan);
-        }
-
-        public List<Fotografer> getUserFotograferBookings(int userId) {
-            return userFotograferBookings.getOrDefault(userId, new ArrayList<>());
-        }
-
-        public List<Catering> getUserCateringBookings(int userId) {
-            return userCateringBookings.getOrDefault(userId, new ArrayList<>());
-        }
-
-        public List<Decorator> getUserDecoratorBookings(int userId) {
-            return userDecoratorBookings.getOrDefault(userId, new ArrayList<>());
-        }
-
-        public List<Hiburan> getUserHiburanBookings(int userId) {
-            return userHiburanBookings.getOrDefault(userId, new ArrayList<>());
-        }
 
         private static int varIdEvent = 1;
         private static int idUser;
@@ -60,15 +12,90 @@ import java.io.IOException;
         private String[] layananEvent = new String[4];
         private int eventCount = 0;
         private int vendorCount = 0;
-
         private double totalHargaVendor = 0;
-
         private String[] layananVendor = new String[5];
-        private int vandorCount = 0;
 
+        //Relasi Agregasi
+        
+        
+        private static List<Klien> daftarUser = new ArrayList<>();
+        private static List<Pernikahan> daftarPemesananPernikahan = new ArrayList<>();
+        private static List<Seminar> daftarPemesananSeminar = new ArrayList<>();
+        private static List<Ultah> daftarPemesananUltah = new ArrayList<>();
+        private static List<Konser> daftarPemesananKonser = new ArrayList<>();
+        private static List<Fotografer> daftarPemesananFotografer = new ArrayList<>();
+        private static List<Catering> daftarPemesananCatering = new ArrayList<>();
+        private static List<Hiburan> daftarPemesananHiburan = new ArrayList<>();
+        private static List<Decorator> daftarPemesananDecorator = new ArrayList<>();
+        private static List<PaketLayanan> daftarPaketLayanan = new ArrayList<>();
+
+
+        private static Map<Integer, List<Integer>> userWeddingHistory = new HashMap<>();
+        private Map<Integer, List<Fotografer>> userFotograferBookings = new HashMap<>();
+        private Map<Integer, List<Catering>> userCateringBookings = new HashMap<>();
+        private Map<Integer, List<Decorator>> userDecoratorBookings = new HashMap<>();
+        private Map<Integer, List<Hiburan>> userHiburanBookings = new HashMap<>();
+
+        public List<Fotografer> getDaftarPemesananFotografer() {return daftarPemesananFotografer;}
+        public List<Catering> getDaftarPemesananCatering(){
+            return daftarPemesananCatering;
+        }
+        public List<Decorator> getDaftarPemesananDecorator(){return daftarPemesananDecorator;}
+        public List<Hiburan> getDaftarPemesananHiburan(){
+            return daftarPemesananHiburan;
+        }
+        public List<PaketLayanan> getDaftarPaketLayanan() {return daftarPaketLayanan;}
+        public List<Klien> getDaftarUser() {
+            return daftarUser;
+        }
+        public void setIdUser(int idUser) {
+            Main.idUser = idUser;
+        }
+        public static int getIdUser() {
+            return idUser;
+        }
+        public Map<Integer, List<Integer>> getUserWeddingHistory() {
+            return userWeddingHistory;
+        }
+
+        //Relasi Dependensi
+        public void addFotograferBooking(int userId, Fotografer fotografer) {
+            userFotograferBookings.computeIfAbsent(Integer.valueOf(userId), k -> new ArrayList<>()).add(fotografer);
+        }
+
+        public void addCateringBooking(int userId, Catering catering) {
+            userCateringBookings.computeIfAbsent(Integer.valueOf(userId), k -> new ArrayList<>()).add(catering);
+        }
+
+        public void addDecoratorBooking(int userId, Decorator decorator) {
+            userDecoratorBookings.computeIfAbsent(Integer.valueOf(userId), k -> new ArrayList<>()).add(decorator);
+        }
+
+        public void addHiburanBooking(int userId, Hiburan hiburan) {
+            userHiburanBookings.computeIfAbsent(Integer.valueOf(userId), k -> new ArrayList<>()).add(hiburan);
+        }
+
+        public List<Fotografer> getUserFotograferBookings(int userId) {
+            return userFotograferBookings.getOrDefault(Optional.of(userId), new ArrayList<>());
+        }
+
+        public List<Catering> getUserCateringBookings(int userId) {
+            return userCateringBookings.getOrDefault(Optional.of(userId), new ArrayList<>());
+        }
+
+        public List<Decorator> getUserDecoratorBookings(int userId) {
+            return userDecoratorBookings.getOrDefault(Optional.of(userId), new ArrayList<>());
+        }
+
+        public List<Hiburan> getUserHiburanBookings(int userId) {
+            return userHiburanBookings.getOrDefault(Optional.of(userId), new ArrayList<>());
+        }
+
+        //Relasi Implementasi (Realisasi)
+        /* Relasi di mana sebuah class mengimplementasikan interface.*/
         public String cetakNotaEvent(){
             NotaEvent nota = new NotaEvent(layananEvent[0],layananEvent[1],layananEvent[2],layananEvent[3],totalHargaEvent);
-            return nota.cetakNota();
+            return nota.cetakNota(layananVendor[0],layananVendor[1],layananVendor[2],layananVendor[3],totalHargaEvent);
         }
 
         public void setTotalHargaEvent(double totalHargaEvent) {
@@ -77,7 +104,7 @@ import java.io.IOException;
 
         public String cetakNotaVendor(){
             NotaVendor nota = new NotaVendor(layananVendor[0],layananVendor[1],layananVendor[2],layananVendor[3],layananVendor[4],totalHargaEvent);
-            return nota.cetakNota();
+            return nota.cetakNota(layananVendor[0],layananVendor[1],layananVendor[2],layananVendor[3],layananVendor[4],totalHargaEvent);
         }
 
         public void setTotalHargaVendor(double totalHargaVendor) {
@@ -110,7 +137,8 @@ import java.io.IOException;
             double totalHarga = hargaLayanan * jumlahTamu;
             Staff kepalaStaff = staffMembers[varStaff++];
 
-            Pernikahan pernikahan = new Pernikahan(idUser, varIdEvent++, jumlahTamu, lokasi, hargaLayanan, totalHarga, tanggal, namaPasangan, kepalaStaff);
+            Pernikahan pernikahan = new Pernikahan(idUser, varIdEvent++, jumlahTamu, lokasi, hargaLayanan,
+                                                    totalHarga, tanggal, namaPasangan, kepalaStaff);
             daftarPemesananPernikahan.add(pernikahan);
         }
 
@@ -119,7 +147,8 @@ import java.io.IOException;
             double totalHargaSeminar = jumlahTamu * hargaLayananSeminar;
             Staff kepalaStaff = staffMembers[varStaff++];
 
-            Seminar seminar = new Seminar(idUser, varIdEvent++, jumlahTamu, lokasi, hargaLayananSeminar, totalHargaSeminar, tanggal, topic, pembicara, kepalaStaff);
+            Seminar seminar = new Seminar(idUser, varIdEvent++, jumlahTamu, lokasi, hargaLayananSeminar,
+                    totalHargaSeminar, tanggal, topic, pembicara, kepalaStaff);
             daftarPemesananSeminar.add(seminar);
         }
 
@@ -128,7 +157,8 @@ import java.io.IOException;
             double totalHargaUltah = jumlahTamu * hargaLayananUltah;
             Staff kepalaStaff = staffMembers[varStaff++];
 
-            Ultah ultah = new Ultah(idUser, varIdEvent++, jumlahTamu, lokasi, hargaLayananUltah, totalHargaUltah, tanggal, namaUltah, usia, kepalaStaff);
+            Ultah ultah = new Ultah(idUser, varIdEvent++, jumlahTamu, lokasi, hargaLayananUltah,
+                    totalHargaUltah, tanggal, namaUltah, usia, kepalaStaff);
             daftarPemesananUltah.add(ultah);
         }
 
@@ -141,34 +171,13 @@ import java.io.IOException;
             daftarPemesananKonser.add(konser);
         }
 
-
-        public List<PaketLayanan> getDaftarPaketLayanan() {
-                return daftarPaketLayanan;
-            }
-
-            public List<Klien> getDaftarUser() {
-                return daftarUser;
-            }
-
-            public void setIdUser(int idUser) {
-                Main.idUser = idUser;
-            }
-
-            public static int getIdUser() {
-                return idUser;
-            }
-
-        public Map<Integer, List<Integer>> getUserWeddingHistory() {
-            return userWeddingHistory;
-        }
-
         public static void addWeddingHistory(int userId, int weddingId) {
             if (userWeddingHistory == null) {
                 userWeddingHistory = new HashMap<>();
             }
 
-            userWeddingHistory.putIfAbsent(userId, new ArrayList<>());
-            boolean isAdded = userWeddingHistory.get(userId).add(weddingId);
+            userWeddingHistory.putIfAbsent(Integer.valueOf(userId), new ArrayList<>());
+            boolean isAdded = userWeddingHistory.get(Optional.of(userId)).add(Integer.valueOf(weddingId));
 
             if (isAdded) {
                 System.out.println("Success: Wedding history added for User ID: " + userId + " with Wedding ID: " + weddingId);
@@ -178,11 +187,11 @@ import java.io.IOException;
         }
 
         public List<Integer> getWeddingHistory(int userId) {
-            if (userWeddingHistory == null || !userWeddingHistory.containsKey(userId)) {
+            if (userWeddingHistory == null || !userWeddingHistory.containsKey(Optional.of(userId))) {
                 System.err.println("Error: No wedding history found for User ID: " + userId);
                 return new ArrayList<>();
             }
-            List<Integer> history = userWeddingHistory.get(userId);
+            List<Integer> history = userWeddingHistory.get(Optional.of(userId));
             System.out.println("Success: Retrieved wedding history for User ID: " + userId + " -> " + history);
             return history;
         }
@@ -226,15 +235,6 @@ import java.io.IOException;
             }
             return userBookings;
         }
-
-        public List<Fotografer> getDaftarPemesananFotografer() {return daftarPemesananFotografer;}
-        public List<Catering> getDaftarPemesananCatering(){
-                return daftarPemesananCatering;
-            }
-        public List<Decorator> getDaftarPemesananDecorator(){return daftarPemesananDecorator;}
-        public List<Hiburan> getDaftarPemesananHiburan(){
-                return daftarPemesananHiburan;
-            }
 
         public static void main(String[] args) throws IOException {
             List<String[]> dataFg = FileReader.readFromFile("file/fg.txt");
@@ -301,7 +301,20 @@ import java.io.IOException;
             }
 
             Main mainApp = new Main();
+            //Relasi Asosiasi
+        /*Relasi di mana satu class mengetahui keberadaan class lain dan menggunakan objek dari class tersebut.
+        * Class Main memiliki banyak daftar seperti:
+          List<Fotografer>, List<Catering>, List<Hiburan>, dll.
+          Relasi ini menunjukkan bahwa Main mengenal dan menggunakan objek dari class seperti Fotografer, Catering, Hiburan, dll.*/
             new Login(mainApp);
             in.close();
         }
     }
+
+    /*Relasi yang terbentuk dalam kode adalah:
+
+    Asosiasi: Class Main mengenal banyak class lain seperti Login, Fotografer, Catering, dll.
+    Dependensi: Metode dalam Main bergantung pada objek seperti Fotografer, Catering, dll.
+    Komposisi: Class seperti Pernikahan, Seminar, Ultah, dan Konser memiliki Staff kepalaStaff.
+    Agregasi: Main memiliki daftar (List) objek seperti Klien, Fotografer, dll., yang dapat berdiri sendiri.
+    Realisasi: Interface Nota diimplementasikan oleh NotaEvent dan NotaVendor.*/
